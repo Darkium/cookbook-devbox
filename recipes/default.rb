@@ -28,6 +28,10 @@ if devbox
 
   mkdir_p "#{userhome}/.ssh"
 
+  execute "configure git" do
+    command %[su #{username} -l -c 'git config --global user.name "#{node.devbox.fullname}" && git config --global user.email "#{node.devbox.email}"'] 
+  end
+
   file "#{userhome}/.ssh/id_rsa" do
     mode "0600"
     user username
